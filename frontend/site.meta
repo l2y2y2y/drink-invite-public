@@ -1,0 +1,8 @@
+{
+    "app_name": "喝一杯吗",
+    "app_description": "喝一杯吗微信酒局邀请 H5",
+    "capabilities": [
+        "access_control"
+    ],
+    "datasources": {}
+}

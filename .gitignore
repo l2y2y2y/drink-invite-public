@@ -1,0 +1,9 @@
+frontend/node_modules/
+frontend/dist/
+frontend/output_deploy/
+frontend/.env.local
+frontend/.vercel/
+backend-public/venv/
+backend-public/__pycache__/
+backend-public/*.db
+.DS_Store

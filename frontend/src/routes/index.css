@@ -1,0 +1,879 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --radius-xl: 28px;
+  --radius-lg: 22px;
+  --radius-md: 16px;
+  --radius-sm: 12px;
+  --shadow-soft: 0 22px 54px rgba(28, 16, 24, 0.12);
+  --shadow-card: 0 18px 36px rgba(25, 18, 24, 0.12);
+  --border-strong: rgba(107, 59, 67, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'PingFang SC', 'Helvetica Neue', sans-serif;
+  background: #f6efe7;
+  color: #2c1d1f;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.party-root {
+  min-height: 100vh;
+  transition: background 240ms ease, color 240ms ease;
+}
+
+.party-root[data-theme='amber'] {
+  --bg-main: linear-gradient(180deg, #f8f0e8 0%, #f5e8db 48%, #f7efe8 100%);
+  --bg-accent: radial-gradient(
+      circle at top left,
+      rgba(210, 126, 76, 0.14),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at right top,
+      rgba(142, 31, 64, 0.14),
+      transparent 26%
+    );
+  --text-main: #2f2022;
+  --text-soft: #7c6866;
+  --panel: rgba(255, 252, 249, 0.88);
+  --panel-alt: rgba(255, 247, 238, 0.94);
+  --line: rgba(122, 78, 62, 0.12);
+  --brand: #8f2448;
+  --brand-2: #cc8d3a;
+  --brand-soft: rgba(143, 36, 72, 0.08);
+  --tag-bg: rgba(204, 141, 58, 0.12);
+  --chip-active: linear-gradient(135deg, #8f2448, #c75f55);
+  --hero: linear-gradient(
+    135deg,
+    rgba(255, 247, 241, 0.94),
+    rgba(247, 229, 209, 0.92)
+  );
+  --metric-accent: linear-gradient(
+    135deg,
+    rgba(143, 36, 72, 0.12),
+    rgba(204, 141, 58, 0.16)
+  );
+}
+
+.party-root[data-theme='velvet'] {
+  --bg-main: linear-gradient(180deg, #170f16 0%, #120c12 44%, #1a1019 100%);
+  --bg-accent: radial-gradient(
+      circle at 12% 12%,
+      rgba(166, 66, 116, 0.28),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 82% 10%,
+      rgba(244, 180, 92, 0.14),
+      transparent 20%
+    ),
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(115, 220, 193, 0.12),
+      transparent 26%
+    );
+  --text-main: #f7f0eb;
+  --text-soft: #e2d5de;
+  --panel: rgba(35, 22, 33, 0.76);
+  --panel-alt: rgba(30, 21, 28, 0.9);
+  --line: rgba(255, 255, 255, 0.08);
+  --brand: #ffcf83;
+  --brand-2: #be4c79;
+  --brand-soft: rgba(255, 207, 131, 0.08);
+  --tag-bg: rgba(255, 207, 131, 0.12);
+  --chip-active: linear-gradient(135deg, #402132, #9f3b66);
+  --hero: linear-gradient(
+    135deg,
+    rgba(56, 27, 45, 0.96),
+    rgba(27, 18, 29, 0.92)
+  );
+  --metric-accent: linear-gradient(
+    135deg,
+    rgba(255, 207, 131, 0.14),
+    rgba(190, 76, 121, 0.18)
+  );
+  --shadow-soft: 0 26px 60px rgba(0, 0, 0, 0.32);
+  --shadow-card: 0 18px 42px rgba(0, 0, 0, 0.28);
+  --border-strong: rgba(255, 255, 255, 0.08);
+}
+
+.party-shell {
+  padding: 28px;
+  background: var(--bg-accent), var(--bg-main);
+  color: var(--text-main);
+}
+
+.party-topbar,
+.hero-card,
+.section-card,
+.modal-card,
+.metric-card,
+.recommend-card,
+.game-item,
+.theme-chip,
+.toggle-card,
+.review-item,
+.choice-pill,
+.status-pill,
+.jump-button,
+.inline-actions button,
+.text-link {
+  transition:
+    transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease,
+    background 180ms ease, color 180ms ease;
+}
+
+.party-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.brand-lockup {
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+.brand-mark {
+  width: 48px;
+  height: 48px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  color: #fff7f2;
+  background: linear-gradient(135deg, var(--brand-2), var(--brand));
+  box-shadow: var(--shadow-card);
+}
+
+.brand-lockup b,
+.hero-card h1,
+.section-head h2,
+.compact-head h2,
+.invite-stage h2,
+.recommend-card h3,
+.game-item h3,
+.host-user b,
+.review-item b,
+.metric-card b,
+.mini-section-head h3 {
+  letter-spacing: -0.02em;
+}
+
+.brand-lockup span {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.brand-lockup small {
+  color: var(--text-soft);
+  margin-top: 2px;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.theme-switcher {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.theme-chip {
+  min-width: 184px;
+  border-radius: 18px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  box-shadow: var(--shadow-card);
+}
+
+.theme-chip span,
+.theme-chip small {
+  display: block;
+}
+
+.theme-chip small {
+  margin-top: 4px;
+  color: var(--text-soft);
+}
+
+.theme-chip.active {
+  background: var(--chip-active);
+  color: #fff7f1;
+  border-color: transparent;
+}
+
+.theme-chip.active small {
+  color: rgba(255, 247, 241, 0.76);
+}
+
+.theme-chip:hover,
+.section-card:hover,
+.metric-card:hover,
+.recommend-card:hover,
+.game-item:hover,
+.toggle-card:hover,
+.review-item:hover {
+  transform: translateY(-2px);
+}
+
+.host-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-card);
+}
+
+.hero-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 24px;
+  padding: 26px 28px;
+  border-radius: 32px;
+  background: var(--hero);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 22px;
+}
+
+.eyebrow,
+.section-kicker,
+.hero-side-label,
+.recommend-meta,
+.game-badge,
+.hint-copy,
+.host-user span,
+.review-item p,
+.invite-message,
+.fact-grid span,
+.modal-copy,
+.timeline-list span,
+.rule-strip span,
+.empty-state,
+.waiting-copy,
+.status-pill.subtle,
+.theme-chip small,
+.toggle-card small,
+.text-link {
+  color: var(--text-soft);
+}
+
+.hero-card h1,
+.section-head h2,
+.invite-stage h2 {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.06;
+}
+
+.hero-copy {
+  max-width: 780px;
+  margin: 12px 0 0;
+  line-height: 1.7;
+}
+
+.hero-tags,
+.inline-actions,
+.cta-row,
+.status-row,
+.rule-strip,
+.review-actions,
+.choice-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.hero-tags {
+  margin-top: 18px;
+}
+
+.hero-tags span,
+.rule-strip span,
+.status-pill,
+.theme-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 12px;
+  border-radius: 999px;
+  background: var(--tag-bg);
+  border: 1px solid var(--line);
+  font-size: 13px;
+}
+
+.hero-side {
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.metric-grid div,
+.metric-card,
+.toggle-card,
+.review-item,
+.recommend-card,
+.game-item,
+.section-card,
+.modal-card {
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--line);
+  background: var(--panel);
+  box-shadow: var(--shadow-card);
+}
+
+.metric-grid div {
+  padding: 16px;
+}
+
+.metric-grid b,
+.metric-card b {
+  font-size: 28px;
+  display: block;
+}
+
+.metric-grid span,
+.metric-card span {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-soft);
+}
+
+.page-grid {
+  display: grid;
+  grid-template-columns: 420px minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.section-card {
+  padding: 22px;
+}
+
+.section-head,
+.mini-section-head,
+.compact-head,
+.stage-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.section-head h2,
+.compact-head h2,
+.mini-section-head h3 {
+  margin: 4px 0 0;
+}
+
+.compact-head h2 {
+  font-size: 24px;
+}
+
+.text-link {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+}
+
+.form-stack,
+.control-stack {
+  display: grid;
+  gap: 14px;
+}
+
+.field-block {
+  display: grid;
+  gap: 8px;
+}
+
+.field-block span {
+  font-size: 13px;
+  color: var(--text-soft);
+}
+
+.field-block input,
+.field-block textarea,
+.field-block select {
+  width: 100%;
+  min-height: 46px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  background: var(--panel-alt);
+  color: var(--text-main);
+  padding: 12px 14px;
+  outline: none;
+}
+
+.field-block textarea {
+  resize: vertical;
+  min-height: 96px;
+}
+
+.field-row.two-col,
+.toggle-grid,
+.double-grid,
+.roster-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.toggle-card {
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+}
+
+.toggle-card b,
+.host-user b,
+.recommend-card h3,
+.game-item h3,
+.review-item b {
+  font-size: 16px;
+}
+
+.toggle-card small,
+.review-item p,
+.invite-message,
+.modal-copy,
+.plain-list span,
+.timeline-list span,
+.rule-list li,
+.host-user span {
+  line-height: 1.6;
+}
+
+.theme-badge {
+  color: var(--brand);
+  font-weight: 700;
+}
+
+.static-card {
+  align-items: center;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.invite-stage {
+  background: linear-gradient(180deg, var(--panel), rgba(255, 255, 255, 0.02));
+}
+
+.invite-message {
+  margin: 14px 0 18px;
+}
+
+.stage-chip.stage-open {
+  color: #3d7a57;
+}
+
+.stage-chip.stage-ongoing {
+  color: #d28d39;
+}
+
+.stage-chip.stage-ended,
+.stage-chip.stage-cancelled,
+.review-actions .danger {
+  color: #ba4a59;
+}
+
+.fact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.fact-grid div,
+.recommend-card,
+.game-item,
+.metric-card,
+.guest-rsvp-card,
+.review-board {
+  background: var(--panel-alt);
+}
+
+.fact-grid div {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  padding: 14px 16px;
+  display: grid;
+  gap: 6px;
+}
+
+.fact-grid span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.fact-grid b {
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.host-summary {
+  margin-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.host-user,
+.guest-pack {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mini-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  color: #fff7f1;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: var(--shadow-card);
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.metric-card {
+  padding: 18px;
+}
+
+.metric-card.accent {
+  background: var(--metric-accent);
+}
+
+.plain-list,
+.timeline-list,
+.rule-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.plain-list {
+  display: grid;
+  gap: 10px;
+}
+
+.plain-list li,
+.timeline-list li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 12px 0;
+  border-bottom: 1px dashed var(--line);
+}
+
+.timeline-list li:last-child,
+.plain-list li:last-child {
+  border-bottom: none;
+}
+
+.rule-list {
+  display: grid;
+  gap: 10px;
+}
+
+.rule-list li {
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  background: var(--brand-soft);
+  border: 1px solid var(--line);
+}
+
+.games-grid,
+.recommend-grid,
+.review-list {
+  display: grid;
+  gap: 14px;
+}
+
+.games-grid,
+.recommend-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.game-item,
+.recommend-card,
+.review-item,
+.guest-rsvp-card,
+.review-board {
+  padding: 18px;
+}
+
+.game-badge,
+.recommend-meta span {
+  width: fit-content;
+  display: inline-flex;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--tag-bg);
+  border: 1px solid var(--line);
+  font-size: 12px;
+}
+
+.prompt-box {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: var(--radius-lg);
+  background: var(--brand-soft);
+  border: 1px solid var(--line);
+  min-height: 86px;
+  line-height: 1.65;
+}
+
+.recommend-card {
+  display: grid;
+  grid-template-columns: 54px 1fr auto;
+  gap: 14px;
+  align-items: center;
+}
+
+.recommend-rank {
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--brand-2), var(--brand));
+  color: #fff8f2;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.recommend-meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.recommend-card h3,
+.game-item h3 {
+  margin: 8px 0 6px;
+}
+
+.recommend-card p,
+.game-item p {
+  margin: 0;
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+
+.recommend-card small,
+.waiting-copy,
+.empty-state,
+.hint-copy {
+  display: block;
+  margin-top: 8px;
+}
+
+.jump-button,
+.inline-actions button,
+.review-actions button,
+.choice-pill {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text-main);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+.jump-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.choice-pill.active {
+  background: var(--chip-active);
+  color: #fff7f1;
+  border-color: transparent;
+}
+
+.review-actions {
+  justify-content: flex-end;
+}
+
+.review-actions button:hover,
+.jump-button:hover,
+.inline-actions button:hover,
+.choice-pill:hover,
+.text-link:hover {
+  box-shadow: var(--shadow-card);
+}
+
+.empty-state {
+  padding: 14px;
+  border-radius: var(--radius-lg);
+  background: var(--brand-soft);
+  border: 1px dashed var(--line);
+}
+
+.modal-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 20, 26, 0.46);
+  backdrop-filter: blur(12px);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  z-index: 20;
+}
+
+.modal-card {
+  width: min(100%, 520px);
+  padding: 22px;
+  background: var(--panel-alt);
+}
+
+@media (max-width: 1180px) {
+  .page-grid,
+  .double-grid,
+  .roster-columns,
+  .field-row.two-col,
+  .toggle-grid,
+  .games-grid,
+  .recommend-grid,
+  .bento-grid,
+  .fact-grid,
+  .metric-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-card,
+  .party-topbar,
+  .topbar-actions,
+  .host-summary,
+  .recommend-card {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .recommend-card {
+    display: grid;
+  }
+}
+
+@media (max-width: 768px) {
+  .party-shell {
+    padding: 16px;
+  }
+
+  .section-card,
+  .hero-card,
+  .metric-card,
+  .modal-card {
+    padding: 18px;
+    border-radius: 24px;
+  }
+
+  .hero-card h1,
+  .section-head h2,
+  .invite-stage h2 {
+    font-size: 26px;
+  }
+
+  .theme-chip {
+    min-width: 0;
+    width: 100%;
+  }
+}
+
+/* Public-share actions keep readable contrast in both atmosphere themes. */
+.party-root button.bg-zinc-100 {
+  background: var(--panel-alt);
+  color: var(--text-main);
+  border: 1px solid var(--line);
+}
+
+.choice-pill:not(.active) {
+  background: var(--panel-alt);
+  color: var(--text-main);
+  font-weight: 650;
+}
+
+.party-root[data-theme='velvet'] input::placeholder,
+.party-root[data-theme='velvet'] textarea::placeholder {
+  color: #c9b6c3;
+  opacity: 1;
+}
