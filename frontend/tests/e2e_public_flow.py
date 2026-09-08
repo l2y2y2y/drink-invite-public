@@ -33,7 +33,7 @@ def main():
                 create_request["body"] = request.post_data_json
 
         host_page.on("request", record_create_request)
-        host_page.goto(BASE_URL, wait_until="networkidle")
+        host_page.goto(BASE_URL, wait_until="load")
         host_page.get_by_role("button", name="确认主理人身份").first.click()
         host_page.locator("dialog input").fill(HOST_NAME)
         host_page.get_by_role("button", name="确认并登录").click()
@@ -64,7 +64,7 @@ def main():
             if message.type == "error"
             else None,
         )
-        guest_page.goto(share_url, wait_until="networkidle")
+        guest_page.goto(share_url, wait_until="load")
         guest_page.get_by_text(TITLE, exact=True).first.wait_for()
         guest_page.locator(".guest-rsvp-card input").fill(GUEST_NAME)
         with guest_page.expect_response(
@@ -76,7 +76,7 @@ def main():
         assert rsvp_response.status == 200, rsvp_response.text()
         guest_page.get_by_text("当前状态：pending").wait_for()
 
-        host_page.reload(wait_until="networkidle")
+        host_page.reload(wait_until="load")
         host_page.get_by_text(GUEST_NAME, exact=True).wait_for()
         with host_page.expect_response(
             lambda response: response.url.endswith("/review")
@@ -86,7 +86,7 @@ def main():
         review_response = response_info.value
         assert review_response.status == 200, review_response.text()
 
-        guest_page.reload(wait_until="networkidle")
+        guest_page.reload(wait_until="load")
         guest_page.get_by_text("当前状态：approved").wait_for()
         assert not console_errors, console_errors
 
